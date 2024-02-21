@@ -1,0 +1,6 @@
+flask
+webdav4
+debugpy
+pymysql
+python-dotenv
+PyJWT

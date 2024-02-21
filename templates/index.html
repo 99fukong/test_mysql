@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary List</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Diary List</h1>
+    <ul>
+        {% for diary in diaries %}
+            <li>
+                <strong>{{ diary.title }}</strong> - {{ diary.content }}
+                <form action="/edit/{{ diary.id }}" method="GET">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/delete/{{ diary.id }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Add New Diary</h2>
+    <form action="/add" method="POST">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+        <button type="submit">Add Diary</button>
+    </form>
+</body>
+</html>
