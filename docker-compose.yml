@@ -21,22 +21,28 @@ services:
     # restart: always
     command: python lzwtest2.py
     networks:
-      - net  
+      - net
 
   mysql:
-    image: mysql:latest
-    # container_name: mysql_db
-    # restart: always
+    image: mysql:8.0
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: diary_db
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+    command: ['--default-authentication-plugin=mysql_native_password']
+    # container_name: mysql_db
+    # restart: always
     ports:
       - "3306:3306"
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/config:/etc/mysql/conf.d
     networks:
-      - net  
+      - net
 
 networks:
   net:
